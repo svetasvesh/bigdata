@@ -1,0 +1,16 @@
+#!/bin/bash
+
+spec=$1
+
+if test -z "$spec" || ! test -f "$spec"; then
+	echo "USAGE: $(basename $0) <your-spec-file>"
+	exit 1
+fi
+
+ORIG_SPEC=/mnt/root/hadoop/spec-orig
+
+{
+	echo "Sorting your spectrum. Please, wait..."
+	echo "Press 'q' to exit."
+	diff -c <(sort --buffer-size=64M "$spec") $ORIG_SPEC
+} | less -S

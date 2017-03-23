@@ -1,0 +1,14 @@
+#!/bin/sh
+
+prefix="output-"
+lastnum=$(find . -maxdepth 1 -name $prefix'*' |
+sed -re 's:./output-([0-9]+):\1:' |
+sort -n | 
+tail -n 1)
+newnum=$(expr $lastnum \+ 1)
+outputdir="$prefix$newnum"
+echo "Output dir: $outputdir"
+hadoop-submit --jar build/spectrum.jar -- \
+	-libjars $PWD/lib/netcdfAll-4.6.jar \
+	/datasets/ndbc-small/ \
+	$PWD/$outputdir

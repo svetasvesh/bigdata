@@ -1,0 +1,12 @@
+import java.io.*;
+import java.util.*;
+
+public class RawSpectrumComparator 
+implements Comparator {
+	public int compare (Object obj1, Object obj2) {
+		RawSpectrum enrty1 = (RawSpectrum)obj1;
+		RawSpectrum enrty2 = (RawSpectrum)obj2;
+		int result = entry1.getDate().compareTo(entry2.getDate());
+		return result;
+	}	
+}
